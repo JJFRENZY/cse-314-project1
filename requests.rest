@@ -1,0 +1,59 @@
+### Root (Hello World)
+GET http://localhost:8080/
+
+### Get all contacts
+GET http://localhost:8080/contacts
+
+### Get one by id (replace with an actual _id)
+GET http://localhost:8080/contacts/665f9d9c7e3c9c5b1f4b1234
+
+### Create a contact
+POST http://localhost:8080/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Deborah",
+  "lastName": "Kline",
+  "email": "deborah@example.com",
+  "favoriteColor": "Blue",
+  "birthday": "2000-02-20"
+}
+
+### Update (replace) a contact
+PUT http://localhost:8080/contacts/665f9d9c7e3c9c5b1f4b1234
+Content-Type: application/json
+
+{
+  "firstName": "Deborah",
+  "lastName": "Kline",
+  "email": "dkline@example.com",
+  "favoriteColor": "Navy",
+  "birthday": "2000-02-20"
+}
+
+### Delete a contact
+DELETE http://localhost:8080/contacts/665f9d9c7e3c9c5b1f4b1234
+
+
+### ---- Render testing (replace base URL) ----
+
+### Root
+GET https://<your-service>.onrender.com/
+
+### Get all
+GET https://<your-service>.onrender.com/contacts
+
+### Get one
+GET https://<your-service>.onrender.com/contacts/665f9d9c7e3c9c5b1f4b1234
+
+### Create
+POST https://<your-service>.onrender.com/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Terry",
+  "lastName": "Stone",
+  "email": "terry.stone@example.com",
+  "favoriteColor": "Green",
+  "birthday": "1995-08-11"
+}

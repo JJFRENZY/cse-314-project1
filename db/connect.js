@@ -1,0 +1,26 @@
+import { MongoClient, ServerApiVersion } from 'mongodb';
+
+let client;
+let db;
+
+export const connectToDb = async (uri, dbName) => {
+  if (db) return db;
+
+  client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true
+    }
+  });
+
+  await client.connect();
+  db = client.db(dbName);
+  console.log(`✅ Connected to MongoDB: ${db.databaseName}`);
+  return db;
+};
+
+export const getDb = () => {
+  if (!db) throw new Error('Database not initialized. Call connectToDb first.');
+  return db;
+};
