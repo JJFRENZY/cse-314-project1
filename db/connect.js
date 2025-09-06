@@ -4,6 +4,9 @@ let client;
 let db;
 
 export const connectToDb = async (uri, dbName) => {
+  if (!uri) throw new Error('MONGODB_URI is not defined');
+  if (!dbName) throw new Error('DB_NAME is not defined');
+
   if (db) return db;
 
   client = new MongoClient(uri, {
