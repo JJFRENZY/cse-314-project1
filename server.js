@@ -9,7 +9,15 @@ import { serveSwagger, setupSwagger } from './swagger.js';
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// ---- Required env var checks (fail fast with clear message) ----
+// --- Boot log (helps debug missing envs on Render) ---
+console.log('🔧 Boot vars:', {
+  hasUri: !!process.env.MONGODB_URI,
+  uriPrefix: (process.env.MONGODB_URI || '').slice(0, 25) + (process.env.MONGODB_URI ? '...' : ''),
+  db: process.env.DB_NAME,
+  port: PORT
+});
+
+// --- Required env var checks ---
 const required = ['MONGODB_URI', 'DB_NAME'];
 for (const key of required) {
   if (!process.env[key]) {
@@ -23,15 +31,15 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-// health/root
+// root route
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-// api routes
+// API routes
 app.use('/contacts', contactsRouter);
 
-// swagger docs
+// Swagger docs
 app.use('/api-docs', serveSwagger, setupSwagger);
 
 // global error handler
